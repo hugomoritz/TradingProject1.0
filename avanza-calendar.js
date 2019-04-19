@@ -68,10 +68,12 @@ function saveReportToDb(array) {
       const collection = db.collection("avanza_financial_report");
 
       collection.deleteMany({});
-      collection.insertMany(array, function(err, res) {
-        if (err) throw err;
-        console.log("Number of documents inserted: " + res.insertedCount);
-      });
+      if (array.length > 0) {
+        collection.insertMany(array, function(err, res) {
+          if (err) throw err;
+          console.log("Number of documents inserted: " + res.insertedCount);
+        });
+      }
       client.close();
     }
   );
